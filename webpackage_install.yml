@@ -1,0 +1,17 @@
+---
+  - name: Install web package and start the service
+    hosts: webservers
+    become: yes
+
+    tasks:
+            - name: installing httpd
+              yum:
+                      name: httpd
+                      state: present
+
+            - name: starting service and truning it to always run
+              service:
+                      name: httpd
+                      state: started
+                      enabled: yes
+

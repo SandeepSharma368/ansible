@@ -1,0 +1,17 @@
+---
+  - name: demo handlers
+    hosts: all
+    become: true
+
+    tasks:
+            - name: Installing httpd
+              yum:
+                      name: httpd
+                      state: installed
+              notify: starting service
+
+    handlers:
+            - name: starting service
+              service:
+                      name: httpd
+                      state: started

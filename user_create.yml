@@ -1,0 +1,10 @@
+---
+ - name: this playbook creates a user on nodes
+   hosts: webservers
+   become: yes
+
+   tasks:
+          - user:
+                  name: testuser1
+                  state: present
+

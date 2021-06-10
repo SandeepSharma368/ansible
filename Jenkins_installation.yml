@@ -1,0 +1,31 @@
+---
+  - name: this playbook installs jenkins
+    hosts: all
+    become: yes
+
+    tasks:
+            - name: installing java
+              yum:
+                      name: java
+                      state: installed
+
+            - name: downloading jenkins
+              get_url:
+                      url: https://pkg.jenkins.io/redhat-stable/jenkins.repo
+                      dest: /etc/yum.repos.d/jenkins.repo
+                     
+            - name: adding key
+              rpm_key:
+                      key: https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+                      state: present
+
+            - name: installing jenkins
+              yum:
+                      name: jenkins
+                      state: installed
+
+            - name: starting jenkins service
+              service:
+                      name: jenkins
+                      state: started
+                      enabled: yes

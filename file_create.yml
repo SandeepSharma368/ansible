@@ -1,0 +1,11 @@
+---
+  - name: Creating a file / Dir
+    hosts: all
+    become: true
+
+    tasks:
+            - name: creating a file (change state to 'directory' in case need a di)
+              file:
+                      path: /etc/testfile.txt
+                      state: touch
+

@@ -1,0 +1,33 @@
+---
+  - name: this playbook installs tomcat
+    hosts: all
+    become: true
+
+    tasks:
+            - name: installing JAVA
+              yum:
+                      name: java
+                      state: installed
+
+
+            - name: downloading tomcat
+              get_url:
+                      url: https://ftp.wayne.edu/apache/tomcat/tomcat-8/v8.5.65/bin/apache-tomcat-8.5.65.tar.gz
+                      dest: /opt
+
+
+            - name: exctracting the package
+              unarchive:
+                      src: /opt/apache-tomcat-8.5.65.tar.gz
+                      dest: /opt
+                      remote_src: yes
+
+            - name: adding perms to startup.sh file
+              file:
+                      path: /opt/apache-tomcat-8.5.65
+                      mode: 0777
+
+            - name: start tomcate service
+              shell: nohup ./startup.sh
+              args:
+                       chdir: /opt/apache-tomcat-8.5.65/bin/

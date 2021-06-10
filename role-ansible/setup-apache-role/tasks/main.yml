@@ -1,0 +1,12 @@
+---
+# tasks file for setup-apache-role
+  - name: installing httpd
+    yum:
+            name: httpd
+            state: installed
+    notify: install is complete, starting the servicenow
+
+  - name: copying index.html
+    copy:
+            src: /home/ansible/index.html
+            dest: /var/www/html

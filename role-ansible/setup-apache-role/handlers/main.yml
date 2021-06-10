@@ -1,0 +1,6 @@
+---
+# handlers file for setup-apache-role
+  - name: install is complete, starting the servicenow
+    service:
+            name: httpd
+            state: started

@@ -1,0 +1,11 @@
+---
+  - name: Installing or Unstalling multiple packages
+    hosts: all
+    become: yes
+
+    tasks:
+            - name: Installing/Uninstalling mutiple packages
+              yum:
+                      name: ['git','tree','make','docker']
+                      state: absent
+
